@@ -1,0 +1,26 @@
+Классы: 
+Bar(каретка)
+Ball(мячик)
+Brick
+Field
+GameLoop
+
+Bar:
+Параметры: widthConst, heightConst, widthCur, heightCur
+xLeftUpperCoord, yLeftUpperCoord
+Методы: Expand(), Narrow(), Move()
+
+
+Ball:
+Параметры: radius, speed
+xDirection, yDirection
+xCoord, yCoord
+bool canReflectBottom, bool canStick
+Методы: Move(), Collision(Field field)
+Reflect(направление отталкивания), RandomlyReflect()
+Stick()
+
+Brick:
+health
+UnbreakableBrick
+MovingBrick
