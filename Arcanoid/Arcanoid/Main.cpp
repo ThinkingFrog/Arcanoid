@@ -1,22 +1,11 @@
 #include <SFML/Graphics.hpp>
+#include "GameLoop.h"
 
 int main(void){
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Arcanoid");
-    while (window.isOpen()) {
-        sf::Event event;
-        
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+    srand((unsigned)time(0));
 
-        window.clear();
-
-        sf::CircleShape shape(200.f);
-        shape.setFillColor(sf::Color::Green);
-        window.draw(shape);
-
-        window.display();
-    }
+    GameLoop GameLoop;
+    GameLoop.Start();
+    
     return 0;
 }
