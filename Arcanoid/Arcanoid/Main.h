@@ -1,6 +1,6 @@
 #pragma once
 
-unsigned constexpr FRAME_RATE = 10;
+unsigned constexpr FRAME_RATE = 100;
 
 unsigned constexpr defaultWindowWidth = 1280;
 unsigned constexpr defaultWindowHeight = 720;
@@ -8,3 +8,10 @@ unsigned constexpr defaultBricksInRow = 6;
 unsigned constexpr defaultBricksInColumn = 4;
 
 unsigned constexpr MAX_BRICK_LEVEL = 4;
+
+int constexpr BALL_X_DIRECTION = -1;
+int constexpr BALL_Y_DIRECTION = -1;
+float constexpr BALL_X_SPEED = (float)2;
+float constexpr BALL_Y_SPEED = (float)2;
+
+float constexpr BAR_X_SPEED = (float)7.5;

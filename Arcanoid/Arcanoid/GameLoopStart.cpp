@@ -3,28 +3,21 @@
 
 void GameLoop::Start() {
     while (window->isOpen()) {
-        sf::Event event;
+        CheckEvents();
 
-        while (window->pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window->close();
-            if (event.type == sf::Event::LostFocus)
-                hasFocus = false;
-            if (event.type == sf::Event::GainedFocus)
-                hasFocus = true;
-        }
-
-        if (hasFocus == false)
+        if (!hasFocus)
             continue;
 
         window->clear();
 
+        ball->Move();
+        ball->Reflect(bar, field);
+
+        bar->Move();
+
         ShowScore();
-
         field->Draw(window);
-
         bar->Draw(window);
-
         ball->Draw(window);
 
         window->display();

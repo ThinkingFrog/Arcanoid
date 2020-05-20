@@ -19,3 +19,13 @@ void Field::Draw(std::shared_ptr <sf::RenderWindow> window) {
     for (auto brick : bricksArray)
         brick.Draw(window, colorsForLevels);
 }
+
+std::vector<Brick> Field::GetBricksArray() {
+    return bricksArray;
+}
+
+void Field::ReduceBrickLevel(unsigned num) {
+    bricksArray[num].ReduceLevel();
+    if (bricksArray[num].GetLevel() == 0)
+        bricksArray.erase(bricksArray.begin() + num);
+}

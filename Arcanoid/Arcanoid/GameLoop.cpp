@@ -42,3 +42,16 @@ void GameLoop::ShowScore() {
 
     window->draw(text);
 }
+
+void GameLoop::CheckEvents() {
+    sf::Event event;
+
+    while (window->pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            window->close();
+        if (event.type == sf::Event::LostFocus)
+            hasFocus = false;
+        if (event.type == sf::Event::GainedFocus)
+            hasFocus = true;
+    }
+}

@@ -21,3 +21,27 @@ void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf:
 
     window->draw(shape);
 }
+
+float Brick::GetXPos() {
+    return x;
+}
+
+float Brick::GetYPos() {
+    return y;
+}
+
+float Brick::GetWidth() {
+    return width;
+}
+
+float Brick::GetHeight() {
+    return height;
+}
+
+void Brick::ReduceLevel() {
+    --level;
+}
+
+int Brick::GetLevel() {
+    return level;
+}

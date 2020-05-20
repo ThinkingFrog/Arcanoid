@@ -39,4 +39,5 @@ public:
     ~GameLoop() {};
     void Start();
     void ShowScore();
+    void CheckEvents();
 };

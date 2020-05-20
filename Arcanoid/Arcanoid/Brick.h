@@ -12,5 +12,11 @@ public:
     Brick(float x, float y, float width, float height);
     ~Brick() {}
     void Draw(std::shared_ptr <sf::RenderWindow> window, const std::array <sf::Color, MAX_BRICK_LEVEL> colorsForLevels);
+    float GetXPos();
+    float GetYPos();
+    float GetWidth();
+    float GetHeight();
+    void ReduceLevel();
+    int GetLevel();
 };
 
