@@ -4,6 +4,8 @@
 Bar::Bar(float x, float y, float width, float height) {
     this->x = x;
     this->y = y;
+    xStart = x;
+    yStart = y;
     this->width = width;
     this->height = height;
     color = sf::Color::Blue;
@@ -41,4 +43,9 @@ float Bar::GetWidth() {
 
 float Bar::GetHeight() {
     return height;
+}
+
+void Bar::Reset() {
+    x = xStart;
+    y = yStart;
 }

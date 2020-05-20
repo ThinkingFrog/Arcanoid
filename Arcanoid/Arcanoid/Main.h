@@ -7,11 +7,13 @@ unsigned constexpr defaultWindowHeight = 720;
 unsigned constexpr defaultBricksInRow = 6;
 unsigned constexpr defaultBricksInColumn = 4;
 
-unsigned constexpr MAX_BRICK_LEVEL = 4;
+unsigned constexpr MAX_BRICK_LEVEL = 3;
 
 int constexpr BALL_X_DIRECTION = -1;
 int constexpr BALL_Y_DIRECTION = -1;
-float constexpr BALL_X_SPEED = (float)2;
-float constexpr BALL_Y_SPEED = (float)2;
+float constexpr BALL_X_SPEED = (float)5;
+float constexpr BALL_Y_SPEED = (float)5;
 
-float constexpr BAR_X_SPEED = (float)7.5;
+float constexpr BAR_X_SPEED = (float)10;
+
+extern int score;

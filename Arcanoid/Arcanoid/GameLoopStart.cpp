@@ -10,6 +10,12 @@ void GameLoop::Start() {
 
         window->clear();
 
+        if (ball->GetYPos() >= defaultWindowHeight) {
+            ball->Reset();
+            bar->Reset();
+            score -= 5;
+        }
+
         ball->Move();
         ball->Reflect(bar, field);
 

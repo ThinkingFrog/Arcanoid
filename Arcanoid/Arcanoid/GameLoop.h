@@ -19,7 +19,6 @@ private:
     float fieldHeight;
     float fieldWidth;
 
-    unsigned score;
     float scoreHeight;
     float scoreWidth;
     sf::Font scoreFont;

@@ -1,6 +1,8 @@
 #include "GameLoop.h"
 #include "Main.h"
 
+int score;
+
 GameLoop::GameLoop() {
     hasFocus = true;
 
@@ -26,7 +28,7 @@ GameLoop::GameLoop() {
     barStartY = windowHeight * (float)0.9;
     bar = std::make_shared <Bar>(barStartX, barStartY, barWidth, barHeight);
 
-    ballRadius = (windowWidth + windowHeight) / (float)150.0;
+    ballRadius = (windowWidth + windowHeight) / (float)200.0;
     ballStartX = barStartX + barWidth / (float)2.0 - ballRadius / (float)2.0;
     ballStartY = barStartY - ballRadius * (float)2.0;
     ball = std::make_shared <Ball>(ballStartX, ballStartY, ballRadius);

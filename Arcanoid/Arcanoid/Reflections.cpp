@@ -25,19 +25,19 @@ void Ball::ReflectBar(std::shared_ptr <Bar> bar) {
 bool Ball::ReflectFromBrick(Brick brick) {
     bool hit = false;
     
-    if (fabs(y - (brick.GetYPos() + brick.GetHeight())) < ySpeed && (x >= brick.GetXPos() && x <= brick.GetXPos() + brick.GetWidth())) {
+    if (fabs(y - (brick.GetYPos() + brick.GetHeight())) <= ySpeed && (x >= brick.GetXPos() && x <= brick.GetXPos() + brick.GetWidth())) {
         yDirect *= -1;
         hit = true;
     }
-    else if (fabs(y + 2 * radius - (brick.GetYPos())) < ySpeed && (x >= brick.GetXPos() && x <= brick.GetXPos() + brick.GetWidth())) {
+    else if (fabs(y + 2 * radius - brick.GetYPos()) <= ySpeed && (x >= brick.GetXPos() && x <= brick.GetXPos() + brick.GetWidth())) {
         yDirect *= -1;
         hit = true;
     }
-    else if (fabs(x + 2 * radius - (brick.GetXPos())) < xSpeed && (y >= brick.GetYPos() && x <= brick.GetYPos() + brick.GetHeight())) {
+    else if (fabs(x + 2 * radius - brick.GetXPos()) <= xSpeed && (y >= brick.GetYPos() && y <= brick.GetYPos() + brick.GetHeight())) {
         xDirect *= -1;
         hit = true;
     }
-    else if (fabs(x - (brick.GetXPos() + brick.GetWidth())) < xSpeed && (y >= brick.GetYPos() && x <= brick.GetYPos() + brick.GetHeight())) {
+    else if (fabs(x - (brick.GetXPos() + brick.GetWidth())) <= xSpeed && (y >= brick.GetYPos() && y <= brick.GetYPos() + brick.GetHeight())) {
         xDirect *= -1;
         hit = true;
     }
@@ -50,6 +50,7 @@ void Ball::ReflectBricks(std::shared_ptr <Field> field) {
     for (unsigned i = 0; i < bricksArray.size(); ++i)
         if (ReflectFromBrick(bricksArray[i])) {
             field->ReduceBrickLevel(i);
+            score += 1;
             break;
         }
 }

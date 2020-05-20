@@ -23,9 +23,6 @@ void Ball::Draw(std::shared_ptr <sf::RenderWindow> window) {
 }
 
 void Ball::Move() {
-    if (y >= defaultWindowHeight)
-        Reset();
-
     x += xDirect * xSpeed;
     y += yDirect * ySpeed;
 }
@@ -37,5 +34,17 @@ void Ball::Reset() {
     ySpeed = BALL_Y_SPEED;
     xDirect = BALL_X_DIRECTION;
     yDirect = BALL_Y_DIRECTION;
+}
+
+float Ball::GetYPos() {
+    return y;
+}
+
+float Ball::GetXPos() {
+    return x;
+}
+
+float Ball::GetRadius() {
+    return radius;
 }
 
