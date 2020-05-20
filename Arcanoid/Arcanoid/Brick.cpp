@@ -8,6 +8,7 @@ Brick::Brick(float x, float y, float width, float height) {
     level = rand() % MAX_BRICK_LEVEL + 1;
     this->width = width;
     this->height = height;
+    type = casual;
 }
 
 void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf::Color, MAX_BRICK_LEVEL> colorsForLevels) {
@@ -15,7 +16,10 @@ void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf:
 
     sf::RectangleShape shape(sf::Vector2f(width, height));
     shape.setPosition(x, y);
-    shape.setFillColor(colorsForLevels[level - 1]);
+    if (type == unbreakable)
+        shape.setFillColor(sf::Color::White);
+    else
+        shape.setFillColor(colorsForLevels[level - 1]);
     shape.setOutlineThickness(outlineSize);
     shape.setOutlineColor(sf::Color::Black);
 
@@ -44,4 +48,8 @@ void Brick::ReduceLevel() {
 
 int Brick::GetLevel() {
     return level;
+}
+
+BRICK_TYPE Brick::GetType() {
+    return type;
 }

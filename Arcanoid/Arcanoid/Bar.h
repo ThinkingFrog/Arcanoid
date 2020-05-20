@@ -11,12 +11,14 @@ private:
 public:
     Bar(float x, float y, float width, float height);
     ~Bar() {}
+
     void Draw(std::shared_ptr <sf::RenderWindow> window);
     void Move();
+    void Reset();
+    
     float GetXPos();
     float GetYPos();
     float GetWidth();
     float GetHeight();
-    void Reset();
 };
 
