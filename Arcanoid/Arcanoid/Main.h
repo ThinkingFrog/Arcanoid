@@ -16,12 +16,17 @@ float constexpr BALL_Y_SPEED = (float)5;
 
 float constexpr BAR_X_SPEED = (float)10;
 
+float constexpr SPEEDING_BRICK_X_ACCELERATION = (float)2;
+float constexpr SPEEDING_BRICK_Y_ACCELERATION = (float)2;
+
 extern int score;
 
 unsigned constexpr UNBREAKABLE_CHANCE = 10;
+unsigned constexpr SPEEDING_CHANCE = 10;
 
 enum BRICK_TYPE {
     casual,
     unbreakable,
+    speeding,
     types_amount,
 };

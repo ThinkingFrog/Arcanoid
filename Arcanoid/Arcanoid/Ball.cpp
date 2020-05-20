@@ -48,3 +48,7 @@ float Ball::GetRadius() {
     return radius;
 }
 
+void Ball::Accelerate(float x, float y) {
+    xSpeed += x;
+    ySpeed += y;
+}

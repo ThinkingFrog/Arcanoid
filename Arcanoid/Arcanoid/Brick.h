@@ -14,6 +14,7 @@ public:
     ~Brick() {}
     void Draw(std::shared_ptr <sf::RenderWindow> window, const std::array <sf::Color, MAX_BRICK_LEVEL> colorsForLevels);
     void virtual ReduceLevel();
+    sf::Vector2f virtual Accelerate() { return { 0, 0 }; }
 
     float GetXPos();
     float GetYPos();

@@ -18,6 +18,8 @@ void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf:
     shape.setPosition(x, y);
     if (type == unbreakable)
         shape.setFillColor(sf::Color::White);
+    else if (type == speeding)
+        shape.setFillColor(sf::Color::Magenta);
     else
         shape.setFillColor(colorsForLevels[level - 1]);
     shape.setOutlineThickness(outlineSize);

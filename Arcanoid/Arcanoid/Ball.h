@@ -25,6 +25,7 @@ public:
     void Move();
     void Reflect(std::shared_ptr<Bar> bar, std::shared_ptr<Field> field);
     void Reset();
+    void Accelerate(float x, float y);
 
     float GetYPos();
     float GetXPos();

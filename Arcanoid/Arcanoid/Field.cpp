@@ -1,6 +1,7 @@
 #include "Field.h"
 #include "Main.h"
 #include "UnbreakableBrick.h"
+#include "SpeedingBrick.h"
 
 Field::Field(unsigned bricksInRow, unsigned bricksInColumn, float startingY, float fieldWidth, float fieldHeight) {
     this->fieldWidth = fieldWidth;
@@ -18,6 +19,8 @@ void Field::GenerateField(void) {
 
             if (rand() % 100 < UNBREAKABLE_CHANCE)
                 brick = new UnbreakableBrick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+            else if (rand() % 100 < SPEEDING_CHANCE)
+                brick = new SpeedingBrick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
             else
                 brick = new Brick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
             

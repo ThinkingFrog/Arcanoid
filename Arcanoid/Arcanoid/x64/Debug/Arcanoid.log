@@ -1,4 +1,11 @@
-﻿  Reflections.cpp
+﻿  Ball.cpp
+  Brick.cpp
+  Field.cpp
+  GameLoop.cpp
+  GameLoopStart.cpp
+  Main.cpp
+  Reflections.cpp
+  SpeedingBrick.cpp
   UnbreakableBrick.cpp
   Создание кода...
   Arcanoid.vcxproj -> C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\x64\Debug\Arcanoid.exe

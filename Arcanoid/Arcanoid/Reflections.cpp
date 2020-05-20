@@ -53,6 +53,9 @@ void Ball::ReflectBricks(std::shared_ptr <Field> field) {
             field->ReduceBrickLevel(i);
             if (bricksArray[i]->GetType() != unbreakable)
                 score += 1;
+            if (bricksArray[i]->GetType() == speeding) {
+                Accelerate(bricksArray[i]->Accelerate().x, bricksArray[i]->Accelerate().y);
+            }
             break;
         }
 }
