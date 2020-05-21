@@ -9,6 +9,7 @@ protected:
     int level;
     float width, height;
     BRICK_TYPE type;
+    sf::Color color;
 public:
     Brick(float x, float y, float width, float height);
     ~Brick() {}

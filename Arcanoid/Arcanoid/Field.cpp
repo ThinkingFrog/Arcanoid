@@ -2,6 +2,7 @@
 #include "Main.h"
 #include "UnbreakableBrick.h"
 #include "SpeedingBrick.h"
+#include "BonusBrick.h"
 
 Field::Field(unsigned bricksInRow, unsigned bricksInColumn, float startingY, float fieldWidth, float fieldHeight) {
     this->fieldWidth = fieldWidth;
@@ -15,14 +16,16 @@ Field::Field(unsigned bricksInRow, unsigned bricksInColumn, float startingY, flo
 void Field::GenerateField(void) {
     for (unsigned i = 0; i < bricksInColumn; i++)
         for (unsigned j = 0; j < bricksInRow; j++) {
-            Brick* brick;
+            std::shared_ptr <Brick> brick;
 
             if (rand() % 100 < UNBREAKABLE_CHANCE)
-                brick = new UnbreakableBrick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared <UnbreakableBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
             else if (rand() % 100 < SPEEDING_CHANCE)
-                brick = new SpeedingBrick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared <SpeedingBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+            else if (rand() % 100 < BONUS_CHANCE)
+                brick = std::make_shared <BonusBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
             else
-                brick = new Brick(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared<Brick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
             
             bricksArray.push_back(brick);
         }
@@ -33,7 +36,7 @@ void Field::Draw(std::shared_ptr <sf::RenderWindow> window) {
         brick->Draw(window, colorsForLevels);
 }
 
-std::vector<Brick*> Field::GetBricksArray() {
+std::vector<std::shared_ptr<Brick>> Field::GetBricksArray() {
     return bricksArray;
 }
 

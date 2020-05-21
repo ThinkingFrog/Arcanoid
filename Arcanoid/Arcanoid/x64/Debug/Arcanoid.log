@@ -1,4 +1,24 @@
-﻿  Ball.cpp
+﻿  ActiveBonuses.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xmemory(1969,9): error C2259: "Bonus": невозможно создать экземпляр абстрактного класса
+C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\Arcanoid\Bonus.h(8): message : см. объявление "Bonus"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xmemory(1969,9): message : из-за следующих членов:
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\xmemory(1969,9): message : void Bonus::Trigger(std::shared_ptr<Field>,std::shared_ptr<Bar>,std::shared_ptr<Ball>): абстрактный
+C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\Arcanoid\Bonus.h(21): message : см. объявление "Bonus::Trigger"
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\memory(1494): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "std::_Wrap<_Ty>"
+          with
+          [
+              _Ty=Bonus
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\memory(1583): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "std::_Ref_count_obj2<_Ty>"
+          with
+          [
+              _Ty=Bonus
+          ]
+C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\Arcanoid\ActiveBonuses.cpp(9): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::shared_ptr<Bonus> std::make_shared<Bonus,float&,float&,float&,float&>(float &,float &,float &,float &)"
+  Ball.cpp
+  Bar.cpp
+  Bonus.cpp
+  BonusBrick.cpp
   Brick.cpp
   Field.cpp
   GameLoop.cpp
@@ -8,4 +28,3 @@
   SpeedingBrick.cpp
   UnbreakableBrick.cpp
   Создание кода...
-  Arcanoid.vcxproj -> C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\x64\Debug\Arcanoid.exe

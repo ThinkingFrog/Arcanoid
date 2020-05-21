@@ -30,8 +30,10 @@ GameLoop::GameLoop() {
 
     ballRadius = (windowWidth + windowHeight) / (float)200.0;
     ballStartX = barStartX + barWidth / (float)2.0 - ballRadius / (float)2.0;
-    ballStartY = barStartY - ballRadius * (float)2.0;
+    ballStartY = barStartY - ballRadius * (float)3.0;
     ball = std::make_shared <Ball>(ballStartX, ballStartY, ballRadius);
+
+    activeBonuses = std::make_shared <ActiveBonuses>();
 }
 
 void GameLoop::ShowScore() {

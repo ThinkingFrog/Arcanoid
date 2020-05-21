@@ -9,6 +9,7 @@ Brick::Brick(float x, float y, float width, float height) {
     this->width = width;
     this->height = height;
     type = casual;
+    color = sf::Color::Transparent;
 }
 
 void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf::Color, MAX_BRICK_LEVEL> colorsForLevels) {
@@ -16,10 +17,8 @@ void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf:
 
     sf::RectangleShape shape(sf::Vector2f(width, height));
     shape.setPosition(x, y);
-    if (type == unbreakable)
-        shape.setFillColor(sf::Color::White);
-    else if (type == speeding)
-        shape.setFillColor(sf::Color::Magenta);
+    if (color != sf::Color::Transparent)
+        shape.setFillColor(color);
     else
         shape.setFillColor(colorsForLevels[level - 1]);
     shape.setOutlineThickness(outlineSize);

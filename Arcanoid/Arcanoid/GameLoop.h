@@ -4,6 +4,7 @@
 #include "Field.h"
 #include "Bar.h"
 #include "Ball.h"
+#include "ActiveBonuses.h"
 
 class GameLoop {
 private:
@@ -33,10 +34,14 @@ private:
     float ballStartX;
     float ballStartY;
     float ballRadius;
+
+    std::shared_ptr <ActiveBonuses> activeBonuses;
 public:
     GameLoop();
     ~GameLoop() {};
     void Start();
     void ShowScore();
     void CheckEvents();
+    void Reflect(std::shared_ptr<Field> field, std::shared_ptr<Bar> bar, std::shared_ptr<Ball> ball, std::shared_ptr<ActiveBonuses> activeBonuses);
+    void BallReflectBricks(std::shared_ptr<Field> field, std::shared_ptr<Ball> ball, std::shared_ptr<ActiveBonuses> activeBonuses);
 };
