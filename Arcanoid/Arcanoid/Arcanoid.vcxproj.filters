@@ -78,6 +78,9 @@
     <ClCompile Include="BottomReflectionBonus.cpp">
       <Filter>Файлы ресурсов\Bonuses</Filter>
     </ClCompile>
+    <ClCompile Include="RandomDirectionBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -123,6 +126,9 @@
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
     <ClInclude Include="BottomReflectionBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomDirectionBonus.h">
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
   </ItemGroup>

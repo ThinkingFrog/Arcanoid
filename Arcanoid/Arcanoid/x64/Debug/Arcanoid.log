@@ -1,5 +1,5 @@
-﻿  Reflections.cpp
-  SpeedingBrick.cpp
-  StickyBarBonus.cpp
+﻿  Ball.cpp
+  Bar.cpp
+  UnbreakableBrick.cpp
   Создание кода...
   Arcanoid.vcxproj -> C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\x64\Debug\Arcanoid.exe

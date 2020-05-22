@@ -14,6 +14,7 @@ Ball::Ball(float x, float y, float radius) {
     yDirect = BALL_Y_DIRECTION;
     sticked = false;
     reflectBottom = false;
+    randomReflection = false;
 }
 
 void Ball::Draw(std::shared_ptr <sf::RenderWindow> window) {
@@ -36,6 +37,18 @@ void Ball::Move() {
             sticked = false;
     }
     else {
+        if (randomReflection)
+            if (rand() % 100 < CHANCE_TO_RANDOM_REFLECT_ON_EACH_FRAME) {
+                switch (rand() % 2) {
+                case 0:
+                    yDirect *= -1;
+                    break;
+                case 1:
+                    xDirect *= -1;
+                    break;
+                }
+                randomReflection = false;
+            }
         x += xDirect * xSpeed;
         y += yDirect * ySpeed;
     }
@@ -79,4 +92,8 @@ bool Ball::GetBottomReflection() {
 
 void Ball::SetColor(sf::Color color) {
     this->color = color;
+}
+
+void Ball::SetRandomReflection(bool reflection) {
+    randomReflection = reflection;
 }

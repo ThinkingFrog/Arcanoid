@@ -15,6 +15,7 @@ private:
 
     bool sticked;
     bool reflectBottom;
+    bool randomReflection;
 public:
     Ball(float x, float y, float radius);
     ~Ball() {}
@@ -29,6 +30,8 @@ public:
     bool GetBottomReflection();
 
     void SetColor(sf::Color color);
+
+    void SetRandomReflection(bool reflection);
 
     void ReflectBar(std::shared_ptr <Bar> bar);
     void ReflectWall();

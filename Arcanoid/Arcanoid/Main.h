@@ -30,6 +30,8 @@ float constexpr BONUS_Y_SPEED = (float)1;
 float constexpr BAR_SIZE_POSSIBLE_CHANGE = (float)1.2;
 float constexpr BALL_SPEED_POSSIBLE_CHANGE = (float)0.5;
 
+unsigned constexpr CHANCE_TO_RANDOM_REFLECT_ON_EACH_FRAME = 10;
+
 enum BRICK_TYPE {
     casual,
     unbreakable,
@@ -43,6 +45,7 @@ enum BONUS_TYPE {
     change_ball_speed,
     sticky_bar,
     bottom_reflect,
+    random_direction,
     bonus_types_amount,
     none,
 };
