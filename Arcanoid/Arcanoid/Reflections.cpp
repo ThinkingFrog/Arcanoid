@@ -7,10 +7,10 @@
 #include "UnbreakableBrick.h"
 #include "GameLoop.h"
 
-void GameLoop::Reflect(std::shared_ptr <Field> field, std::shared_ptr <Bar> bar, std::shared_ptr <Ball> ball, std::shared_ptr <ActiveBonuses> activeBonuses) {
+void GameLoop::Reflect() {
     ball->ReflectWall();
     ball->ReflectBar(bar);
-    BallReflectBricks(field, ball, activeBonuses);
+    BallReflectBricks();
 }
 
 void Ball::ReflectWall() {
@@ -18,11 +18,22 @@ void Ball::ReflectWall() {
         xDirect *= -1;
     if (y <= 0)
         yDirect *= -1;
+    if (reflectBottom && y >= defaultWindowHeight) {
+        yDirect *= -1;
+        y -= ySpeed; 
+        reflectBottom = false;
+        color = sf::Color::White;
+    }
 }
 
 void Ball::ReflectBar(std::shared_ptr <Bar> bar) {
-    if (fabs(y + 2 * radius - bar->GetYPos()) <  ySpeed && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth()))
+    if (fabs(y + 2 * radius - bar->GetYPos()) < ySpeed && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth())) {
         yDirect *= -1;
+        if (bar->GetStick()) {
+            sticked = true;
+            y = yStart;
+        }
+    }
 }
 
 bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
@@ -30,22 +41,22 @@ bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     float maxDiagDist = sqrt(ySpeed * ySpeed + xSpeed * xSpeed);
     
     //bottom edge
-    if (fabs(y - (brick->GetYPos() + brick->GetHeight())) < ySpeed && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
+    if (fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
         yDirect *= -1;
         hit = true;
     }
     //upper edge
-    else if (fabs(y + 2 * radius - brick->GetYPos()) < ySpeed && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
+    else if (fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
         yDirect *= -1;
         hit = true;
     }
     //left edge
-    else if (fabs(x + 2 * radius - brick->GetXPos()) < xSpeed && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
+    else if (fabs(x + 2 * radius - brick->GetXPos()) < maxDiagDist && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
         xDirect *= -1;
         hit = true;
     }
     //right edge
-    else if (fabs(x - (brick->GetXPos() + brick->GetWidth())) < xSpeed && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
+    else if (fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
         xDirect *= -1;
         hit = true;
     }
@@ -77,7 +88,7 @@ bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     return hit;
 }
 
-void GameLoop::BallReflectBricks(std::shared_ptr <Field> field, std::shared_ptr <Ball> ball, std::shared_ptr <ActiveBonuses> activeBonuses) {
+void GameLoop::BallReflectBricks() {
     std::vector<std::shared_ptr<Brick>> bricksArray = field->GetBricksArray();
     unsigned i = 0;
     for (auto brick : bricksArray) {

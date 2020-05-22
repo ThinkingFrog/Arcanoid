@@ -1,6 +1,8 @@
 #include "ActiveBonuses.h"
 #include "ChangeBarSizeBonus.h"
 #include "ChangeBallSpeedBonus.h"
+#include "StickyBarBonus.h"
+#include "BottomReflectionBonus.h"
 
 void ActiveBonuses::Draw(std::shared_ptr <sf::RenderWindow> window) {
     for (auto bonus : bonusesArray)
@@ -15,6 +17,12 @@ void ActiveBonuses::AddRandomBonus(float x, float y, float radius, float speed) 
         break;
     case change_ball_speed:
         bonus = std::make_shared <ChangeBallSpeedBonus>(x, y, radius, speed);
+        break;
+    case sticky_bar:
+        bonus = std::make_shared <StickyBarBonus>(x, y, radius, speed);
+        break;
+    case bottom_reflect:
+        bonus = std::make_shared <BottomReflectionBonus>(x, y, radius, speed);
         break;
     }
     bonusesArray.push_back(bonus);

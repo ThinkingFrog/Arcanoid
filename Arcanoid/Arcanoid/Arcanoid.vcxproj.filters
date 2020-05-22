@@ -72,6 +72,12 @@
     <ClCompile Include="ChangeBallSpeedBonus.cpp">
       <Filter>Файлы ресурсов\Bonuses</Filter>
     </ClCompile>
+    <ClCompile Include="StickyBarBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
+    <ClCompile Include="BottomReflectionBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -111,6 +117,12 @@
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
     <ClInclude Include="ChangeBallSpeedBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="StickyBarBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="BottomReflectionBonus.h">
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
   </ItemGroup>

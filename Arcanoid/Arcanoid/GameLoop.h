@@ -42,6 +42,6 @@ public:
     void Start();
     void ShowScore();
     void CheckEvents();
-    void Reflect(std::shared_ptr<Field> field, std::shared_ptr<Bar> bar, std::shared_ptr<Ball> ball, std::shared_ptr<ActiveBonuses> activeBonuses);
-    void BallReflectBricks(std::shared_ptr<Field> field, std::shared_ptr<Ball> ball, std::shared_ptr<ActiveBonuses> activeBonuses);
+    void Reflect();
+    void BallReflectBricks();
 };

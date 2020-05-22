@@ -8,6 +8,7 @@ private:
     sf::Color color;
     float xSpeed;
     float xStart, yStart;
+    bool stick;
 public:
     Bar(float x, float y, float width, float height);
     ~Bar() {}
@@ -15,6 +16,10 @@ public:
     void Draw(std::shared_ptr <sf::RenderWindow> window);
     void Move();
     void Reset();
+
+    void SetStick(bool stick);
+
+    bool GetStick();
     
     float GetXPos();
     float GetYPos();
@@ -22,5 +27,6 @@ public:
     float GetHeight();
 
     void SetWidth(float width);
+    void SetColor(sf::Color color);
 };
 

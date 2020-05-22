@@ -41,6 +41,8 @@ enum BRICK_TYPE {
 enum BONUS_TYPE {
     change_bar_size,
     change_ball_speed,
+    sticky_bar,
+    bottom_reflect,
     bonus_types_amount,
     none,
 };

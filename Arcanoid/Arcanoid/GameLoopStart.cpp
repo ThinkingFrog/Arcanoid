@@ -10,7 +10,7 @@ void GameLoop::Start() {
 
         window->clear();
 
-        if (ball->GetYPos() >= defaultWindowHeight) {
+        if (ball->GetYPos() >= defaultWindowHeight && !ball->GetBottomReflection()) {
             ball->Reset();
             bar->Reset();
             score -= 5;
@@ -20,7 +20,7 @@ void GameLoop::Start() {
         activeBonuses->MoveAll(bar, field, ball);
         bar->Move();
 
-        Reflect(field, bar, ball, activeBonuses);
+        Reflect();
         
         field->Draw(window);
         bar->Draw(window);
