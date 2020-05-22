@@ -23,9 +23,12 @@ extern int score;
 
 unsigned constexpr UNBREAKABLE_CHANCE = 5;
 unsigned constexpr SPEEDING_CHANCE = 10;
-unsigned constexpr BONUS_CHANCE = 40;
+unsigned constexpr BONUS_CHANCE = 100;
 
 float constexpr BONUS_Y_SPEED = (float)1;
+
+float constexpr BAR_SIZE_POSSIBLE_CHANGE = (float)1.2;
+float constexpr BALL_SPEED_POSSIBLE_CHANGE = (float)0.5;
 
 enum BRICK_TYPE {
     casual,
@@ -36,6 +39,8 @@ enum BRICK_TYPE {
 };
 
 enum BONUS_TYPE {
+    change_bar_size,
+    change_ball_speed,
     bonus_types_amount,
     none,
 };

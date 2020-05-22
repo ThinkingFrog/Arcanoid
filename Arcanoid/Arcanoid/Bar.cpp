@@ -45,6 +45,10 @@ float Bar::GetHeight() {
     return height;
 }
 
+void Bar::SetWidth(float width) {
+    this->width = width;
+}
+
 void Bar::Reset() {
     x = xStart;
     y = yStart;

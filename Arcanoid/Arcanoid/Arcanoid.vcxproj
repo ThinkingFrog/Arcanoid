@@ -156,6 +156,8 @@
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="BonusBrick.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="ChangeBallSpeedBonus.cpp" />
+    <ClCompile Include="ChangeBarSizeBonus.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameLoopStart.cpp" />
@@ -171,6 +173,8 @@
     <ClInclude Include="Bonus.h" />
     <ClInclude Include="BonusBrick.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="ChangeBallSpeedBonus.h" />
+    <ClInclude Include="ChangeBarSizeBonus.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="Main.h" />

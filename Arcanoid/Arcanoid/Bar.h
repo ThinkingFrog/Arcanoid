@@ -20,5 +20,7 @@ public:
     float GetYPos();
     float GetWidth();
     float GetHeight();
+
+    void SetWidth(float width);
 };
 

@@ -5,8 +5,6 @@ Bonus::Bonus(float x, float y, float radius, float ySpeed) {
     this->y = y;
     this->radius = radius;
     this->ySpeed = ySpeed;
-    color = sf::Color::Cyan;
-    type = bonus_types_amount;
 }
 
 void Bonus::Draw(std::shared_ptr <sf::RenderWindow> window) {
@@ -22,5 +20,9 @@ void Bonus::Move() {
 }
 
 bool Bonus::CaughtByBar(std::shared_ptr <Bar> bar) {
-    return fabs(y + 2 * radius - bar->GetYPos()) < ySpeed && fabs(y - (bar->GetYPos() + bar->GetHeight())) < ySpeed && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth());
+    return y + 2 * radius >= bar->GetYPos() && y <= bar->GetYPos() + bar->GetHeight() && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth());
+}
+
+float Bonus::GetYPos() {
+    return y;
 }

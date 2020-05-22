@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы ресурсов\Bricks">
+      <UniqueIdentifier>{ab8c11d8-1bb2-403b-b88f-b21a76966375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Bonuses">
+      <UniqueIdentifier>{be988ab0-6ef6-4164-a84f-872834b207da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Bricks">
+      <UniqueIdentifier>{8ff9f7aa-c132-4675-bff2-f174954161b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Bonuses">
+      <UniqueIdentifier>{0104d4ac-c717-4948-959e-7100b89d8974}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -27,9 +39,6 @@
     <ClCompile Include="Field.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="Bar.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
@@ -39,20 +48,29 @@
     <ClCompile Include="Reflections.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="UnbreakableBrick.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="SpeedingBrick.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="Bonus.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="BonusBrick.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="ActiveBonuses.cpp">
       <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Файлы ресурсов\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeedingBrick.cpp">
+      <Filter>Файлы ресурсов\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="UnbreakableBrick.cpp">
+      <Filter>Файлы ресурсов\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="Bonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusBrick.cpp">
+      <Filter>Файлы ресурсов\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeBarSizeBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeBallSpeedBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,29 +83,35 @@
     <ClInclude Include="Field.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Bar.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="UnbreakableBrick.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="SpeedingBrick.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Bonus.h">
+    <ClInclude Include="ActiveBonuses.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="BonusBrick.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Bricks</Filter>
     </ClInclude>
-    <ClInclude Include="ActiveBonuses.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Brick.h">
+      <Filter>Файлы заголовков\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeedingBrick.h">
+      <Filter>Файлы заголовков\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="UnbreakableBrick.h">
+      <Filter>Файлы заголовков\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBarSizeBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeBallSpeedBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

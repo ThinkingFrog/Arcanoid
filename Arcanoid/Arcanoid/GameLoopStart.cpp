@@ -16,12 +16,12 @@ void GameLoop::Start() {
             score -= 5;
         }
 
-        Reflect(field, bar, ball, activeBonuses);
-
         ball->Move();
         activeBonuses->MoveAll(bar, field, ball);
         bar->Move();
 
+        Reflect(field, bar, ball, activeBonuses);
+        
         field->Draw(window);
         bar->Draw(window);
         ball->Draw(window);
