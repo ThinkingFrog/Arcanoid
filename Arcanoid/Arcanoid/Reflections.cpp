@@ -11,14 +11,21 @@ void GameLoop::Reflect() {
     ball->ReflectWall();
     ball->ReflectBar(bar);
     BallReflectBricks();
+    field->CheckForCollisionsBetweenBricks();
 }
 
 void Ball::ReflectWall() {
-    if (x <= 0 || x + 2 * radius >= defaultWindowWidth)
+    float maxDiagDist = sqrt(ySpeed * ySpeed + xSpeed * xSpeed);
+    bool FellToLeft = x <= maxDiagDist;
+    bool FellToRight = fabs(x + 2 * radius - maxDiagDist) >= defaultWindowWidth;
+    bool FellToTop = y <= maxDiagDist;
+    bool FellToBottom = fabs(y - defaultWindowHeight) <= maxDiagDist;
+
+    if (FellToLeft || FellToRight)
         xDirect *= -1;
-    if (y <= 0)
+    if (FellToTop)
         yDirect *= -1;
-    if (reflectBottom && y >= defaultWindowHeight) {
+    if (reflectBottom && FellToBottom) {
         yDirect *= -1;
         y -= ySpeed; 
         reflectBottom = false;
@@ -27,7 +34,11 @@ void Ball::ReflectWall() {
 }
 
 void Ball::ReflectBar(std::shared_ptr <Bar> bar) {
-    if (fabs(y + 2 * radius - bar->GetYPos()) < ySpeed && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth())) {
+    bool yLowerThanBarTop = fabs(y + 2 * radius - bar->GetYPos()) < ySpeed;
+    bool xToRightFromBarLeft = x >= bar->GetXPos();
+    bool xToLeftFromBarRight = x <= bar->GetXPos() + bar->GetWidth();
+
+    if (yLowerThanBarTop && xToRightFromBarLeft && xToLeftFromBarRight) {
         yDirect *= -1;
         if (bar->GetStick()) {
             sticked = true;
@@ -39,47 +50,57 @@ void Ball::ReflectBar(std::shared_ptr <Bar> bar) {
 bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     bool hit = false;
     float maxDiagDist = sqrt(ySpeed * ySpeed + xSpeed * xSpeed);
-    
+
+    bool yHigherThanBrickBottom = fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist;
+    bool yLowerThanBrickTop = fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist;
+    bool xToRightFromBrickLeft = fabs(x + 2 * radius - brick->GetXPos()) < maxDiagDist;
+    bool xToLeftFromBrickRight = fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist;
+
+    bool yHigherThanBrickBottomStrict = y > brick->GetYPos();
+    bool yLowerThanBrickTopStrict = y < brick->GetYPos() + brick->GetHeight();
+    bool xToRightFromBrickLeftStrict = x > brick->GetXPos();
+    bool xToLeftFromBrickRightStrict = x < brick->GetXPos() + brick->GetWidth();
+
     //bottom edge
-    if (fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
+    if (yHigherThanBrickBottom && xToRightFromBrickLeftStrict && xToLeftFromBrickRightStrict) {
         yDirect *= -1;
         hit = true;
     }
     //upper edge
-    else if (fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist && (x > brick->GetXPos() && x < brick->GetXPos() + brick->GetWidth())) {
+    else if (yLowerThanBrickTop && xToRightFromBrickLeftStrict && xToLeftFromBrickRightStrict) {
         yDirect *= -1;
         hit = true;
     }
     //left edge
-    else if (fabs(x + 2 * radius - brick->GetXPos()) < maxDiagDist && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
+    else if (xToRightFromBrickLeft && yHigherThanBrickBottomStrict && yLowerThanBrickTopStrict) {
         xDirect *= -1;
         hit = true;
     }
     //right edge
-    else if (fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist && (y > brick->GetYPos() && y < brick->GetYPos() + brick->GetHeight())) {
+    else if (xToLeftFromBrickRight && yHigherThanBrickBottomStrict && yLowerThanBrickTopStrict) {
         xDirect *= -1;
         hit = true;
     }
     //right bottom corner
-    else if (fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist && fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist) {
+    else if (xToLeftFromBrickRight && yHigherThanBrickBottom) {
         xDirect *= -1;
         yDirect *= -1;
         hit = true;
     }
     //right top corner
-    else if (fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist && fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist) {
+    else if (xToLeftFromBrickRight && yLowerThanBrickTop) {
         xDirect *= -1;
         yDirect *= -1;
         hit = true;
     }
     //left top corner
-    else if (fabs(x + 2 * radius - brick->GetXPos()) < maxDiagDist && fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist) {
+    else if (xToRightFromBrickLeft && yLowerThanBrickTop) {
         xDirect *= -1;
         yDirect *= -1;
         hit = true;
     }
     //left bottom corner
-    else if (fabs(x + 2 * radius) < maxDiagDist && fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist) {
+    else if (xToRightFromBrickLeft && yHigherThanBrickBottom) {
         xDirect *= -1;
         yDirect *= -1;
         hit = true;
@@ -117,4 +138,13 @@ void GameLoop::BallReflectBricks() {
         }
         i++;
     }
+}
+
+void Field::CheckForCollisionsBetweenBricks() {
+    for (auto brick1 : bricksArray)
+        for (auto brick2 : bricksArray)
+            if (brick1->GetXPos() == brick2->GetXPos() + brick2->GetWidth() && brick1->GetYPos() == brick2->GetYPos())
+                brick1->SetDirection(1);
+            else if (brick1->GetXPos() + brick1->GetWidth() == brick2->GetXPos() && brick1->GetYPos() == brick2->GetYPos())
+                brick1->SetDirection(-1);
 }

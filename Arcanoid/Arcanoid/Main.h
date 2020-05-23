@@ -26,7 +26,7 @@ float constexpr BAR_SIZE_POSSIBLE_CHANGE = (float)1.2;
 unsigned constexpr UNBREAKABLE_CHANCE = 5;
 unsigned constexpr SPEEDING_CHANCE = 10;
 
-unsigned constexpr BONUS_CHANCE = 50;
+unsigned constexpr BONUS_CHANCE = 100;
 float constexpr BONUS_Y_SPEED = (float)1;
 unsigned constexpr CHANCE_TO_RANDOM_REFLECT_ON_EACH_FRAME = 10;
 

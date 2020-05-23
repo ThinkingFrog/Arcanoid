@@ -20,17 +20,20 @@ GameLoop::GameLoop() {
     bricksInColumn = defaultBricksInColumn;
     fieldWidth = (float)windowWidth;
     fieldHeight = windowHeight * (float)0.3;
+    
     field = std::make_shared <Field>(bricksInRow, bricksInColumn, scoreHeight, fieldWidth, fieldHeight);
 
     barWidth = windowWidth / (float)4.0;
     barHeight = windowHeight / (float)20.0;
     barStartX = windowWidth / (float)2.0 - barWidth / (float)2.0;
     barStartY = windowHeight * (float)0.9;
+    
     bar = std::make_shared <Bar>(barStartX, barStartY, barWidth, barHeight);
 
-    ballRadius = (windowWidth + windowHeight) / (float)200.0;
+    ballRadius = (fieldWidth / bricksInRow + fieldHeight / bricksInColumn) / (float)30.0;
     ballStartX = barStartX + barWidth / (float)2.0 - ballRadius / (float)2.0;
     ballStartY = barStartY - ballRadius * (float)3.0;
+
     ball = std::make_shared <Ball>(ballStartX, ballStartY, ballRadius);
 
     activeBonuses = std::make_shared <ActiveBonuses>();
@@ -58,4 +61,49 @@ void GameLoop::CheckEvents() {
         if (event.type == sf::Event::GainedFocus)
             hasFocus = true;
     }
+}
+
+void GameLoop::CheckBallFellDown() {
+    if (ball->GetYPos() >= defaultWindowHeight && !ball->GetBottomReflection()) {
+        ball->Reset();
+        bar->Reset();
+        score -= 5;
+    }
+}
+
+void GameLoop::MoveAll() {
+    ball->Move();
+    activeBonuses->MoveAll(bar, field, ball);
+    bar->Move();
+    field->MoveAll();
+}
+
+void GameLoop::DrawAll() {
+    field->Draw(window);
+    bar->Draw(window);
+    ball->Draw(window);
+    activeBonuses->Draw(window);
+    ShowScore();
+}
+
+bool GameLoop::CheckGameOver() {
+    if (field->CheckForGameEnd()) {
+        window->clear();
+        ShowScore();
+
+        sf::Text text;
+        text.setPosition(defaultWindowWidth / 3, defaultWindowHeight / 2);
+        text.setFont(scoreFont);
+        text.setFillColor(sf::Color::Red);
+        text.setString("GAME OVER");
+        text.setStyle(sf::Text::Bold);
+        text.setCharacterSize((defaultWindowWidth + defaultWindowHeight) / 30);
+
+        window->draw(text);
+
+        window->display();
+
+        return true;
+    }
+    return false;
 }

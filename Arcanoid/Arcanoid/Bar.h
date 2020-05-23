@@ -17,15 +17,13 @@ public:
     void Move();
     void Reset();
 
-    void SetStick(bool stick);
-
     bool GetStick();
-    
     float GetXPos();
     float GetYPos();
     float GetWidth();
     float GetHeight();
 
+    void SetStick(bool stick);
     void SetWidth(float width);
     void SetColor(sf::Color color);
 };

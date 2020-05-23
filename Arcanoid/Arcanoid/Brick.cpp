@@ -54,3 +54,8 @@ int Brick::GetLevel() {
 BRICK_TYPE Brick::GetType() {
     return type;
 }
+
+void Brick::SetDirection(int direct) {
+    if (direct == 1 || direct == -1)
+        xDirection = direct;
+}

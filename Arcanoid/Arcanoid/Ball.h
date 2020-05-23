@@ -16,6 +16,8 @@ private:
     bool sticked;
     bool reflectBottom;
     bool randomReflection;
+
+
 public:
     Ball(float x, float y, float radius);
     ~Ball() {}
@@ -24,19 +26,20 @@ public:
     void Move();
     void Reset();
     void Accelerate(float x, float y);
+    void MoveWithBar();
+
+
 
     void SetBottomReflection(bool reflection);
-
-    bool GetBottomReflection();
-
     void SetColor(sf::Color color);
-
     void SetRandomReflection(bool reflection);
 
+    void RandomlyReflect();
     void ReflectBar(std::shared_ptr <Bar> bar);
     void ReflectWall();
     bool ReflectFromBrick(std::shared_ptr <Brick> brick);
 
+    bool GetBottomReflection();
     float GetYPos();
     float GetXPos();
     float GetRadius();

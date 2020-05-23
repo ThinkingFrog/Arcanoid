@@ -27,30 +27,39 @@ void Ball::Draw(std::shared_ptr <sf::RenderWindow> window) {
     window->draw(shape);
 }
 
+void Ball::MoveWithBar() {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        if (x >= 0)
+            x -= BAR_X_SPEED;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        if (x + 2 * radius <= defaultWindowWidth)
+            x += BAR_X_SPEED;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        sticked = false;
+}
+
+void Ball::RandomlyReflect() {
+    if (rand() % 100 < CHANCE_TO_RANDOM_REFLECT_ON_EACH_FRAME) {
+        switch (rand() % 2) {
+        case 0:
+            yDirect *= -1;
+            break;
+        case 1:
+            xDirect *= -1;
+            break;
+        }
+        randomReflection = false;
+    }
+}
+
 void Ball::Move() {
     if (sticked) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-            if (x >= 0)
-                x -= BAR_X_SPEED;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-            if (x + 2 * radius <= defaultWindowWidth)
-                x += BAR_X_SPEED;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-            sticked = false;
+        MoveWithBar();
     }
     else {
         if (randomReflection)
-            if (rand() % 100 < CHANCE_TO_RANDOM_REFLECT_ON_EACH_FRAME) {
-                switch (rand() % 2) {
-                case 0:
-                    yDirect *= -1;
-                    break;
-                case 1:
-                    xDirect *= -1;
-                    break;
-                }
-                randomReflection = false;
-            }
+            RandomlyReflect();
+            
         x += xDirect * xSpeed;
         y += yDirect * ySpeed;
     }

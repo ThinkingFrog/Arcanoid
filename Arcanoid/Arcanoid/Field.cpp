@@ -18,15 +18,19 @@ void Field::GenerateField(void) {
     for (unsigned i = 0; i < bricksInColumn; i++)
         for (unsigned j = 0; j < bricksInRow; j++) {
             std::shared_ptr <Brick> brick;
-
+            float brickWidth = (float)fieldWidth / bricksInRow;
+            float brickHeight = (float)fieldHeight / bricksInColumn;
+            float brickX = j * brickWidth;
+            float brickY = startingY + i * brickHeight;
+            
             if (rand() % 100 < UNBREAKABLE_CHANCE)
-                brick = std::make_shared <UnbreakableBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared <UnbreakableBrick>(brickX, brickY, brickWidth, brickHeight);
             else if (rand() % 100 < SPEEDING_CHANCE)
-                brick = std::make_shared <SpeedingBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared <SpeedingBrick>(brickX, brickY, brickWidth, brickHeight);
             else if (rand() % 100 < BONUS_CHANCE)
-                brick = std::make_shared <BonusBrick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared <BonusBrick>(brickX, brickY, brickWidth, brickHeight);
             else
-                brick = std::make_shared<Brick>(j * (float)fieldWidth / bricksInRow, startingY + i * (float)fieldHeight / bricksInColumn, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+                brick = std::make_shared<Brick>(brickX, brickY, brickWidth, brickHeight);
             
             bricksArray.push_back(brick);
         }
@@ -52,7 +56,30 @@ void Field::MoveAll() {
         brick->Move();
 }
 
+bool Field::CheckXForNewMoving(float x, float y) {
+    for (auto brick : bricksArray)
+        if (brick->GetYPos() == y)
+            if (x >= brick->GetXPos() && x <= brick->GetXPos() + brick->GetWidth() || x >= defaultWindowWidth - brick->GetWidth())
+                return false;
+    return true;
+}
+
 void Field::AddMovingBrick() {
-    std::shared_ptr <Brick> brick = std::make_shared <MovingBrick>((float)(rand() % (int)fieldWidth), startingY + fieldHeight * (float)1.05, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+    float xRand; 
+    float yMoving = startingY + fieldHeight * (float)1.05;
+    float brickWidth = (float)fieldWidth / bricksInRow;
+    float brickHeight = (float)fieldHeight / bricksInColumn;
+
+    do
+        xRand = (float)(rand() % (int)fieldWidth);
+    while (!CheckXForNewMoving(xRand, yMoving));
+    std::shared_ptr <Brick> brick = std::make_shared <MovingBrick>(xRand, yMoving, brickWidth, brickHeight);
         bricksArray.push_back(brick);
+}
+
+bool Field::CheckForGameEnd() {
+    for (auto brick : bricksArray)
+        if (brick->GetType() != unbreakable)
+            return false;
+    return true;
 }

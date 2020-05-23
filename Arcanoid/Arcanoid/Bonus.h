@@ -15,10 +15,13 @@ protected:
 public:
     Bonus(float x, float y, float radius, float ySpeed);
     ~Bonus() {}
+
     void Draw(std::shared_ptr <sf::RenderWindow> window);
     void Move();
-    bool CaughtByBar(std::shared_ptr <Bar> bar);
-    float GetYPos();
     void virtual Trigger(std::shared_ptr <Field> field, std::shared_ptr <Bar> bar, std::shared_ptr <Ball> ball) = 0;
+    
+    bool CaughtByBar(std::shared_ptr <Bar> bar);
+    
+    float GetYPos();
+    
 };
-

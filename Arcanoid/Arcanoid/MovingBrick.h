@@ -3,7 +3,6 @@
 class MovingBrick : public Brick {
 private:
     float xSpeed;
-    int xDirection;
 public:
     MovingBrick(float x, float y, float width, float height);
     ~MovingBrick() {}

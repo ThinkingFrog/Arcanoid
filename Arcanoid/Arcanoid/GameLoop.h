@@ -36,12 +36,18 @@ private:
     float ballRadius;
 
     std::shared_ptr <ActiveBonuses> activeBonuses;
-public:
-    GameLoop();
-    ~GameLoop() {};
-    void Start();
+    
     void ShowScore();
     void CheckEvents();
     void Reflect();
     void BallReflectBricks();
+    void CheckBallFellDown();
+    void MoveAll();
+    void DrawAll();
+    bool CheckGameOver();
+public:
+    GameLoop();
+    ~GameLoop() {};
+    void Start();
+    
 };

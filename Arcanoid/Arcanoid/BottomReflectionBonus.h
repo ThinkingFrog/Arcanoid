@@ -6,4 +6,3 @@ public:
     ~BottomReflectionBonus() {}
     void Trigger(std::shared_ptr <Field> field, std::shared_ptr <Bar> bar, std::shared_ptr <Ball> ball) override;
 };
-

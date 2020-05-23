@@ -8,26 +8,21 @@ void GameLoop::Start() {
         if (!hasFocus)
             continue;
 
+        if (CheckGameOver())
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+                break;
+            else
+                continue;
+
         window->clear();
 
-        if (ball->GetYPos() >= defaultWindowHeight && !ball->GetBottomReflection()) {
-            ball->Reset();
-            bar->Reset();
-            score -= 5;
-        }
+        CheckBallFellDown();
 
-        ball->Move();
-        activeBonuses->MoveAll(bar, field, ball);
-        bar->Move();
-        field->MoveAll();
+        MoveAll();
 
         Reflect();
         
-        field->Draw(window);
-        bar->Draw(window);
-        ball->Draw(window);
-        activeBonuses->Draw(window);
-        ShowScore();
+        DrawAll();
 
         window->display();
     }

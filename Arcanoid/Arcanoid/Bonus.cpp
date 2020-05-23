@@ -20,7 +20,11 @@ void Bonus::Move() {
 }
 
 bool Bonus::CaughtByBar(std::shared_ptr <Bar> bar) {
-    return y + 2 * radius >= bar->GetYPos() && y <= bar->GetYPos() + bar->GetHeight() && (x >= bar->GetXPos() && x <= bar->GetXPos() + bar->GetWidth());
+    bool yLowerThanBarTop = y + 2 * radius >= bar->GetYPos();
+    bool yHigherThanBarBottom = y <= bar->GetYPos() + bar->GetHeight();
+    bool xRightToBarLeft = x >= bar->GetXPos();
+    bool xLeftToBarRight = x <= bar->GetXPos() + bar->GetWidth();
+    return yLowerThanBarTop && yHigherThanBarBottom && xRightToBarLeft && xLeftToBarRight;
 }
 
 float Bonus::GetYPos() {
