@@ -8,7 +8,7 @@ GameLoop::GameLoop() {
 
     windowWidth = defaultWindowWidth;
     windowHeight = defaultWindowHeight;
-    window = std::make_shared <sf::RenderWindow>(sf::VideoMode(windowWidth, windowHeight), "Arcanoid");
+    window = std::make_shared <sf::RenderWindow>(sf::VideoMode(windowWidth, windowHeight), "Arcanoid", sf::Style::Close);
     window->setFramerateLimit(FRAME_RATE);
     
     scoreWidth = windowWidth * (float)0.3;

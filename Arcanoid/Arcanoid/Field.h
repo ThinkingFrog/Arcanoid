@@ -16,6 +16,8 @@ public:
     void Draw(std::shared_ptr <sf::RenderWindow> window);
     std::vector <std::shared_ptr<Brick>> GetBricksArray();
     void ReduceBrickLevel(unsigned num);
+    void MoveAll();
+    void AddMovingBrick();
     ~Field() {};
 };
 

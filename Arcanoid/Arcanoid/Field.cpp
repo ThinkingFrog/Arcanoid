@@ -3,6 +3,7 @@
 #include "UnbreakableBrick.h"
 #include "SpeedingBrick.h"
 #include "BonusBrick.h"
+#include "MovingBrick.h"
 
 Field::Field(unsigned bricksInRow, unsigned bricksInColumn, float startingY, float fieldWidth, float fieldHeight) {
     this->fieldWidth = fieldWidth;
@@ -44,4 +45,14 @@ void Field::ReduceBrickLevel(unsigned num) {
     bricksArray[num]->ReduceLevel();
     if (bricksArray[num]->GetLevel() == 0)
         bricksArray.erase(bricksArray.begin() + num);
+}
+
+void Field::MoveAll() {
+    for (auto& brick : bricksArray)
+        brick->Move();
+}
+
+void Field::AddMovingBrick() {
+    std::shared_ptr <Brick> brick = std::make_shared <MovingBrick>((float)(rand() % (int)fieldWidth), startingY + fieldHeight * (float)1.05, (float)fieldWidth / bricksInRow, (float)fieldHeight / bricksInColumn);
+        bricksArray.push_back(brick);
 }

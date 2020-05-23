@@ -81,6 +81,12 @@
     <ClCompile Include="RandomDirectionBonus.cpp">
       <Filter>Файлы ресурсов\Bonuses</Filter>
     </ClCompile>
+    <ClCompile Include="MovingBrick.cpp">
+      <Filter>Файлы ресурсов\Bricks</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingBrickBonus.cpp">
+      <Filter>Файлы ресурсов\Bonuses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLoop.h">
@@ -129,6 +135,12 @@
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
     <ClInclude Include="RandomDirectionBonus.h">
+      <Filter>Файлы заголовков\Bonuses</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingBrick.h">
+      <Filter>Файлы заголовков\Bricks</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingBrickBonus.h">
       <Filter>Файлы заголовков\Bonuses</Filter>
     </ClInclude>
   </ItemGroup>

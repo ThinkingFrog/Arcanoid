@@ -8,10 +8,12 @@ Ball::Ball(float x, float y, float radius) {
     yStart = y;
     this->radius = radius;
     color = sf::Color::White;
+    
     xSpeed = BALL_X_SPEED;
     ySpeed = BALL_Y_SPEED;
     xDirect = BALL_X_DIRECTION;
     yDirect = BALL_Y_DIRECTION;
+
     sticked = false;
     reflectBottom = false;
     randomReflection = false;

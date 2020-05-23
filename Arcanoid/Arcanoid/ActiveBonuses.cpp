@@ -4,6 +4,7 @@
 #include "StickyBarBonus.h"
 #include "BottomReflectionBonus.h"
 #include "RandomDirectionBonus.h"
+#include "MovingBrickBonus.h"
 
 void ActiveBonuses::Draw(std::shared_ptr <sf::RenderWindow> window) {
     for (auto bonus : bonusesArray)
@@ -27,6 +28,9 @@ void ActiveBonuses::AddRandomBonus(float x, float y, float radius, float speed) 
         break;
     case random_direction:
         bonus = std::make_shared <RandomDirectionBonus>(x, y, radius, speed);
+        break;
+    case moving_brick:
+        bonus = std::make_shared <MovingBrickBonus>(x, y, radius, speed);
         break;
     }
     bonusesArray.push_back(bonus);

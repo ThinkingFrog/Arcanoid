@@ -19,6 +19,7 @@ void GameLoop::Start() {
         ball->Move();
         activeBonuses->MoveAll(bar, field, ball);
         bar->Move();
+        field->MoveAll();
 
         Reflect();
         
