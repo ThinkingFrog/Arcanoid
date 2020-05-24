@@ -5,6 +5,8 @@ class UnbreakableBrick : public Brick {
 public:
     UnbreakableBrick(float x, float y, float width, float height);
     ~UnbreakableBrick() {}
-    void ReduceLevel() override;
+
+    /**Overrides default level reduction to do nothing*/
+    void ReduceLevel() override;    
 };
 

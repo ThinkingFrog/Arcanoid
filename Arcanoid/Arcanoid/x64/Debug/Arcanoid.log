@@ -1,2 +1,22 @@
-﻿  Reflections.cpp
+﻿  ActiveBonuses.cpp
+  Ball.cpp
+  Bar.cpp
+  Bonus.cpp
+  BonusBrick.cpp
+  BottomReflectionBonus.cpp
+  Brick.cpp
+  ChangeBallSpeedBonus.cpp
+  ChangeBarSizeBonus.cpp
+  Field.cpp
+  GameLoop.cpp
+  GameLoopStart.cpp
+  Main.cpp
+  MovingBrick.cpp
+  MovingBrickBonus.cpp
+  RandomDirectionBonus.cpp
+  Reflections.cpp
+  SpeedingBrick.cpp
+  StickyBarBonus.cpp
+  UnbreakableBrick.cpp
+  Создание кода...
   Arcanoid.vcxproj -> C:\myfiles\#GitHub_Repositories\Arcanoid\Arcanoid\x64\Debug\Arcanoid.exe

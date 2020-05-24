@@ -129,6 +129,7 @@ void GameLoop::BallReflectBricks() {
                 float bonusX = brick->GetXPos() + brick->GetWidth() / 2;
                 float bonusY = brick->GetYPos() + brick->GetHeight() / 2;
                 float bonusRadius = (brick->GetWidth() + brick->GetHeight()) / 20;
+
                 activeBonuses->AddRandomBonus(bonusX, bonusY, bonusRadius, BONUS_Y_SPEED);
             }
 
@@ -141,10 +142,29 @@ void GameLoop::BallReflectBricks() {
 }
 
 void Field::CheckForCollisionsBetweenBricks() {
-    for (auto brick1 : bricksArray)
-        for (auto brick2 : bricksArray)
-            if (fabs(brick1->GetXPos() - (brick2->GetXPos() + brick2->GetWidth())) <= MOVING_BRICK_X_SPEED && brick1->GetYPos() == brick2->GetYPos() && brick1->GetType() == moving && brick2->GetType() == moving)
+    for (auto brick1 : bricksArray) {
+        
+        float brick1LeftX = brick1->GetXPos();
+        float brick1RightX = brick1LeftX + brick1->GetWidth();
+        float brick1TopY = brick1->GetYPos();
+        BRICK_TYPE brick1Type = brick1->GetType();
+
+        for (auto brick2 : bricksArray) {
+        
+            float brick2LeftX = brick2->GetXPos();
+            float brick2RightX = brick2LeftX + brick2->GetWidth();
+            float brick2TopY = brick2->GetYPos();
+            BRICK_TYPE brick2Type = brick2->GetType();
+
+            bool collisionOnFirstBrickLeft = fabs(brick1LeftX - brick2RightX) <= MOVING_BRICK_X_SPEED;
+            bool collisionOnFirstBrickRight = fabs(brick1RightX - brick2LeftX) <= MOVING_BRICK_X_SPEED;
+            bool sameY = brick1TopY == brick2TopY;
+            bool bothAreMoving = brick1Type == moving && brick2Type == moving;
+
+            if (collisionOnFirstBrickLeft && sameY && bothAreMoving)
                 brick1->SetDirection(1);
-            else if (fabs(brick1->GetXPos() + brick1->GetWidth() - brick2->GetXPos()) <= MOVING_BRICK_X_SPEED && brick1->GetYPos() == brick2->GetYPos() && brick1->GetType() == moving && brick2->GetType() == moving)
+            else if (collisionOnFirstBrickRight && sameY && bothAreMoving)
                 brick1->SetDirection(-1);
+        }
+    }
 }

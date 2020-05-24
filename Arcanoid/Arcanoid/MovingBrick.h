@@ -6,6 +6,8 @@ private:
 public:
     MovingBrick(float x, float y, float width, float height);
     ~MovingBrick() {}
-    void Move() override;
+
+    /**Move brick in X axis*/
+    void Move() override;   
 };
 

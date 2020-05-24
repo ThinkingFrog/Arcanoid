@@ -8,6 +8,8 @@ private:
 public:
     SpeedingBrick(float x, float y, float width, float height);
     ~SpeedingBrick() {}
-    sf::Vector2f Accelerate() override;
+
+    /**Overrides default acceleration method to return xAcc and yAcc fields*/
+    sf::Vector2f Accelerate() override; 
 };
 
