@@ -143,8 +143,8 @@ void GameLoop::BallReflectBricks() {
 void Field::CheckForCollisionsBetweenBricks() {
     for (auto brick1 : bricksArray)
         for (auto brick2 : bricksArray)
-            if (brick1->GetXPos() == brick2->GetXPos() + brick2->GetWidth() && brick1->GetYPos() == brick2->GetYPos())
+            if (fabs(brick1->GetXPos() - (brick2->GetXPos() + brick2->GetWidth())) <= MOVING_BRICK_X_SPEED && brick1->GetYPos() == brick2->GetYPos() && brick1->GetType() == moving && brick2->GetType() == moving)
                 brick1->SetDirection(1);
-            else if (brick1->GetXPos() + brick1->GetWidth() == brick2->GetXPos() && brick1->GetYPos() == brick2->GetYPos())
+            else if (fabs(brick1->GetXPos() + brick1->GetWidth() - brick2->GetXPos()) <= MOVING_BRICK_X_SPEED && brick1->GetYPos() == brick2->GetYPos() && brick1->GetType() == moving && brick2->GetType() == moving)
                 brick1->SetDirection(-1);
 }
