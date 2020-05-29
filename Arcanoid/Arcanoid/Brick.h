@@ -22,7 +22,7 @@ public:
     Brick(float x, float y, float width, float height); 
 
     /**Default destructor*/
-    ~Brick() {} 
+    virtual ~Brick() {} 
 
     /**
     *Draw brick in specified window using it's color or an array of colors matching bricks levels

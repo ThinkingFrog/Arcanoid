@@ -61,8 +61,32 @@ bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     bool xToRightFromBrickLeftStrict = x > brick->GetXPos();
     bool xToLeftFromBrickRightStrict = x < brick->GetXPos() + brick->GetWidth();
 
+    //right bottom corner
+    if (xToLeftFromBrickRight && yHigherThanBrickBottom) {
+    xDirect *= -1;
+    yDirect *= -1;
+    hit = true;
+    }
+    //right top corner
+    else if (xToLeftFromBrickRight && yLowerThanBrickTop) {
+    xDirect *= -1;
+    yDirect *= -1;
+    hit = true;
+    }
+    //left top corner
+    else if (xToRightFromBrickLeft && yLowerThanBrickTop) {
+    xDirect *= -1;
+    yDirect *= -1;
+    hit = true;
+    }
+    //left bottom corner
+    else if (xToRightFromBrickLeft && yHigherThanBrickBottom) {
+    xDirect *= -1;
+    yDirect *= -1;
+    hit = true;
+    }
     //bottom edge
-    if (yHigherThanBrickBottom && xToRightFromBrickLeftStrict && xToLeftFromBrickRightStrict) {
+    else if (yHigherThanBrickBottom && xToRightFromBrickLeftStrict && xToLeftFromBrickRightStrict) {
         yDirect *= -1;
         hit = true;
     }
@@ -79,30 +103,6 @@ bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     //right edge
     else if (xToLeftFromBrickRight && yHigherThanBrickBottomStrict && yLowerThanBrickTopStrict) {
         xDirect *= -1;
-        hit = true;
-    }
-    //right bottom corner
-    else if (xToLeftFromBrickRight && yHigherThanBrickBottom) {
-        xDirect *= -1;
-        yDirect *= -1;
-        hit = true;
-    }
-    //right top corner
-    else if (xToLeftFromBrickRight && yLowerThanBrickTop) {
-        xDirect *= -1;
-        yDirect *= -1;
-        hit = true;
-    }
-    //left top corner
-    else if (xToRightFromBrickLeft && yLowerThanBrickTop) {
-        xDirect *= -1;
-        yDirect *= -1;
-        hit = true;
-    }
-    //left bottom corner
-    else if (xToRightFromBrickLeft && yHigherThanBrickBottom) {
-        xDirect *= -1;
-        yDirect *= -1;
         hit = true;
     }
 

@@ -30,7 +30,7 @@ public:
     /**
     *Default destructor
     */
-    ~Bonus() {}
+    virtual ~Bonus() {}
 
     /**
     *Draw bonus in specified window
