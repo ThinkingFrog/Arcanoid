@@ -59,7 +59,7 @@ void Field::MoveAll() {
 bool Field::CheckXForNewMoving(float x, float y) {
     for (auto brick : bricksArray)
         if (brick->GetYPos() == y)
-            if ((x + brick->GetWidth() >= brick->GetXPos() && x <= brick->GetXPos() + brick->GetWidth()) || (x + brick->GetWidth() >= defaultWindowWidth))
+            if ((x + brick->GetWidth() >= brick->GetXPos() && x <= brick->GetXPos() + brick->GetWidth()) || (x + brick->GetWidth() * 1.5 >= defaultWindowWidth))
                 return false;
     return true;
 }
