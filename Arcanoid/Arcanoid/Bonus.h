@@ -14,11 +14,8 @@
 */
 class Bonus {
 protected:
-    float x, y; /**Current coordinates*/
+    sf::CircleShape *bonus;
     float ySpeed;   /**Falling speed*/
-    float radius;   /**Size*/
-    sf::Color color;    /**Bonus color*/
-    BONUS_TYPE type;    /**Bonus type from special enum list*/
 public:
     /**
     *Default constructor
@@ -30,7 +27,7 @@ public:
     /**
     *Default destructor
     */
-    virtual ~Bonus() {}
+    virtual ~Bonus();
 
     /**
     *Draw bonus in specified window

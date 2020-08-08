@@ -1,8 +1,7 @@
 #include "ChangeBarSizeBonus.h"
 
 ChangeBarSizeBonus::ChangeBarSizeBonus(float x, float y, float radius, float ySpeed) : Bonus(x, y, radius, ySpeed) { 
-    color = sf::Color::Cyan; 
-    type = change_bar_size;
+    bonus->setFillColor(sf::Color::Cyan);
     sizeChange = BAR_SIZE_POSSIBLE_CHANGE;
 }
 

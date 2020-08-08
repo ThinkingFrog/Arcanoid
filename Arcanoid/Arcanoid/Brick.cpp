@@ -3,7 +3,7 @@
 #include "Main.h"
 
 Brick::Brick(float x, float y, float width, float height) {
-    brick = new sf::RectangleShape(sf::Vector2f(width, height));
+    brick = new sf::RectangleShape({ width, height });
     brick->setPosition(x, y);
 
     level = rand() % MAX_BRICK_LEVEL + 1;

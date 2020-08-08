@@ -1,8 +1,7 @@
 #include "ChangeBallSpeedBonus.h"
 
 ChangeBallSpeedBonus::ChangeBallSpeedBonus(float x, float y, float radius, float ySpeed) : Bonus(x, y, radius, ySpeed) {
-    color = sf::Color::Cyan;
-    type = change_ball_speed;
+    bonus->setFillColor(sf::Color::Cyan);
     speedChange = BAR_SIZE_POSSIBLE_CHANGE;
 }
 

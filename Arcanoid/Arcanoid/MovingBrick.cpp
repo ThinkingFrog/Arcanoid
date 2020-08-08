@@ -10,5 +10,5 @@ MovingBrick::MovingBrick(float x, float y, float width, float height) : Brick(x,
 void MovingBrick::Move() {
     if (brick->getPosition().x <= 0 || brick->getPosition().x + brick->getSize().x >= defaultWindowWidth)
         xDirection *= -1;
-    brick->setPosition({ brick->getPosition().x + xDirection * xSpeed , brick->getPosition().y});
+    brick->move({ xDirection * xSpeed , 0});
 }
