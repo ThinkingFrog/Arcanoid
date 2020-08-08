@@ -10,9 +10,8 @@
 */
 class Brick {
 protected:
-    float x, y; /**Current coordinates*/
+    sf::RectangleShape *brick;
     int level;  /**Current level*/
-    float width, height;    /**Sizes*/
     BRICK_TYPE type;    /**Type specified by enum*/
     sf::Color color;    /**Color, transparent by default*/
 
@@ -22,7 +21,7 @@ public:
     Brick(float x, float y, float width, float height); 
 
     /**Default destructor*/
-    virtual ~Brick() {} 
+    virtual ~Brick();
 
     /**
     *Draw brick in specified window using it's color or an array of colors matching bricks levels

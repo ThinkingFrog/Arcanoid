@@ -3,44 +3,45 @@
 #include "Main.h"
 
 Brick::Brick(float x, float y, float width, float height) {
-    this->x = x;
-    this->y = y;
+    brick = new sf::RectangleShape(sf::Vector2f(width, height));
+    brick->setPosition(x, y);
+
     level = rand() % MAX_BRICK_LEVEL + 1;
-    this->width = width;
-    this->height = height;
     type = casual;
     color = sf::Color::Transparent;
 }
 
+Brick::~Brick() {
+    delete brick;
+}
+
 void Brick::Draw(std::shared_ptr<sf::RenderWindow> window, const std::array <sf::Color, MAX_BRICK_LEVEL> colorsForLevels) {
-    float outlineSize = (float)(-(width + height) / 2 * 0.035);
+    float outlineSize = (float)(-(brick->getSize().x + brick->getSize().y) / 2 * 0.035);
 
-    sf::RectangleShape shape(sf::Vector2f(width, height));
-    shape.setPosition(x, y);
     if (color != sf::Color::Transparent)
-        shape.setFillColor(color);
+        brick->setFillColor(color);
     else
-        shape.setFillColor(colorsForLevels[level - 1]);
-    shape.setOutlineThickness(outlineSize);
-    shape.setOutlineColor(sf::Color::Black);
+        brick->setFillColor(colorsForLevels[level - 1]);
+    brick->setOutlineThickness(outlineSize);
+    brick->setOutlineColor(sf::Color::Black);
 
-    window->draw(shape);
+    window->draw(*brick);
 }
 
 float Brick::GetXPos() {
-    return x;
+    return brick->getPosition().x;
 }
 
 float Brick::GetYPos() {
-    return y;
+    return brick->getPosition().y;
 }
 
 float Brick::GetWidth() {
-    return width;
+    return brick->getSize().x;
 }
 
 float Brick::GetHeight() {
-    return height;
+    return brick->getSize().y;
 }
 
 void Brick::ReduceLevel() {
