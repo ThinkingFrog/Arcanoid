@@ -2,12 +2,11 @@
 #include "Main.h"
 
 Ball::Ball(float x, float y, float radius) {
-    this->x = x;
-    this->y = y;
+    ball = new sf::CircleShape(radius);
+    ball->setPosition(x, y);
+    ball->setFillColor(sf::Color::White);
     xStart = x;
     yStart = y;
-    this->radius = radius;
-    color = sf::Color::White;
     
     xSpeed = BALL_X_SPEED;
     ySpeed = BALL_Y_SPEED;
@@ -19,21 +18,21 @@ Ball::Ball(float x, float y, float radius) {
     randomReflection = false;
 }
 
-void Ball::Draw(std::shared_ptr <sf::RenderWindow> window) {
-    sf::CircleShape shape(radius);
-    shape.setPosition(x, y);
-    shape.setFillColor(color);
+Ball::~Ball() {
+    delete ball;
+}
 
-    window->draw(shape);
+void Ball::Draw(std::shared_ptr <sf::RenderWindow> window) {
+    window->draw(*ball);
 }
 
 void Ball::MoveWithBar() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        if (x >= 0)
-            x -= BAR_X_SPEED;
+        if (ball->getPosition().x >= 0)
+            ball->move({-BAR_X_SPEED, 0});
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        if (x + 2 * radius <= defaultWindowWidth)
-            x += BAR_X_SPEED;
+        if (ball->getPosition().x + 2 * ball->getRadius() <= defaultWindowWidth)
+            ball->move({ BAR_X_SPEED, 0 });
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         sticked = false;
 }
@@ -53,21 +52,18 @@ void Ball::RandomlyReflect() {
 }
 
 void Ball::Move() {
-    if (sticked) {
+    if (sticked)
         MoveWithBar();
-    }
     else {
         if (randomReflection)
             RandomlyReflect();
             
-        x += xDirect * xSpeed;
-        y += yDirect * ySpeed;
+        ball->move({ xDirect * xSpeed, yDirect * ySpeed });
     }
 }
 
 void Ball::Reset() {
-    x = xStart;
-    y = yStart;
+    ball->setPosition(xStart, yStart);
     xSpeed = BALL_X_SPEED;
     ySpeed = BALL_Y_SPEED;
     xDirect = BALL_X_DIRECTION;
@@ -75,15 +71,15 @@ void Ball::Reset() {
 }
 
 float Ball::GetYPos() {
-    return y;
+    return ball->getPosition().y;
 }
 
 float Ball::GetXPos() {
-    return x;
+    return ball->getPosition().x;
 }
 
 float Ball::GetRadius() {
-    return radius;
+    return ball->getRadius();
 }
 
 void Ball::Accelerate(float x, float y) {
@@ -102,7 +98,7 @@ bool Ball::GetBottomReflection() {
 }
 
 void Ball::SetColor(sf::Color color) {
-    this->color = color;
+    ball->setFillColor(color);
 }
 
 void Ball::SetRandomReflection(bool reflection) {

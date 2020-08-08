@@ -16,10 +16,10 @@ void GameLoop::Reflect() {
 
 void Ball::ReflectWall() {
     float maxDiagDist = sqrt(ySpeed * ySpeed + xSpeed * xSpeed);
-    bool FellToLeft = x <= maxDiagDist;
-    bool FellToRight = fabs(x + 2 * radius - maxDiagDist) >= defaultWindowWidth;
-    bool FellToTop = y <= maxDiagDist;
-    bool FellToBottom = fabs(y - defaultWindowHeight) <= maxDiagDist;
+    bool FellToLeft = ball->getPosition().x <= maxDiagDist;
+    bool FellToRight = fabs(ball->getPosition().x + 2 * ball->getRadius() - maxDiagDist) >= defaultWindowWidth;
+    bool FellToTop = ball->getPosition().y <= maxDiagDist;
+    bool FellToBottom = fabs(ball->getPosition().y - defaultWindowHeight) <= maxDiagDist;
 
     if (FellToLeft || FellToRight)
         xDirect *= -1;
@@ -27,22 +27,22 @@ void Ball::ReflectWall() {
         yDirect *= -1;
     if (reflectBottom && FellToBottom) {
         yDirect *= -1;
-        y -= ySpeed; 
+        ball->move({0, -ySpeed});
         reflectBottom = false;
-        color = sf::Color::White;
+        ball->setFillColor(sf::Color::White);
     }
 }
 
 void Ball::ReflectBar(std::shared_ptr <Bar> bar) {
-    bool yLowerThanBarTop = fabs(y + 2 * radius - bar->GetYPos()) < ySpeed;
-    bool xToRightFromBarLeft = x >= bar->GetXPos();
-    bool xToLeftFromBarRight = x <= bar->GetXPos() + bar->GetWidth();
+    bool yLowerThanBarTop = fabs(ball->getPosition().y + 2 * ball->getRadius() - bar->GetYPos()) < ySpeed;
+    bool xToRightFromBarLeft = ball->getPosition().x >= bar->GetXPos();
+    bool xToLeftFromBarRight = ball->getPosition().x <= bar->GetXPos() + bar->GetWidth();
 
     if (yLowerThanBarTop && xToRightFromBarLeft && xToLeftFromBarRight) {
         yDirect *= -1;
         if (bar->GetStick()) {
             sticked = true;
-            y = yStart;
+            ball->setPosition(ball->getPosition().x, yStart);
         }
     }
 }
@@ -51,15 +51,15 @@ bool Ball::ReflectFromBrick(std::shared_ptr<Brick> brick) {
     bool hit = false;
     float maxDiagDist = sqrt(ySpeed * ySpeed + xSpeed * xSpeed);
 
-    bool yHigherThanBrickBottom = fabs(y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist;
-    bool yLowerThanBrickTop = fabs(y + 2 * radius - brick->GetYPos()) < maxDiagDist;
-    bool xToRightFromBrickLeft = fabs(x + 2 * radius - brick->GetXPos()) < maxDiagDist;
-    bool xToLeftFromBrickRight = fabs(x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist;
+    bool yHigherThanBrickBottom = fabs(ball->getPosition().y - (brick->GetYPos() + brick->GetHeight())) < maxDiagDist;
+    bool yLowerThanBrickTop = fabs(ball->getPosition().y + 2 * ball->getRadius() - brick->GetYPos()) < maxDiagDist;
+    bool xToRightFromBrickLeft = fabs(ball->getPosition().x + 2 * ball->getRadius() - brick->GetXPos()) < maxDiagDist;
+    bool xToLeftFromBrickRight = fabs(ball->getPosition().x - (brick->GetXPos() + brick->GetWidth())) < maxDiagDist;
 
-    bool yHigherThanBrickBottomStrict = y > brick->GetYPos();
-    bool yLowerThanBrickTopStrict = y < brick->GetYPos() + brick->GetHeight();
-    bool xToRightFromBrickLeftStrict = x > brick->GetXPos();
-    bool xToLeftFromBrickRightStrict = x < brick->GetXPos() + brick->GetWidth();
+    bool yHigherThanBrickBottomStrict = ball->getPosition().y > brick->GetYPos();
+    bool yLowerThanBrickTopStrict = ball->getPosition().y < brick->GetYPos() + brick->GetHeight();
+    bool xToRightFromBrickLeftStrict = ball->getPosition().x > brick->GetXPos();
+    bool xToLeftFromBrickRightStrict = ball->getPosition().x < brick->GetXPos() + brick->GetWidth();
 
     //right bottom corner
     if (xToLeftFromBrickRight && yHigherThanBrickBottom) {

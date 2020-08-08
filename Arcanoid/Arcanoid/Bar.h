@@ -6,15 +6,13 @@
 */
 class Bar {
 private:
-    float width, height;
-    float x, y;
-    sf::Color color;
+    sf::RectangleShape* bar;
     float xSpeed;   /**Needed only for moving bricks*/
     float xStart, yStart;
     bool stick; /**If ball should stick to bar on next interaction or not*/
 public:
     Bar(float x, float y, float width, float height);
-    ~Bar() {}
+    ~Bar();
 
     void Draw(std::shared_ptr <sf::RenderWindow> window);
     
@@ -25,7 +23,7 @@ public:
     void Reset();
 
     /**Return stick boolean field*/
-    bool GetStick();  
+    bool GetStick();
 
     float GetXPos();
     float GetYPos();

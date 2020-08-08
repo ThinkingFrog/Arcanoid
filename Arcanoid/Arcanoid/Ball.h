@@ -11,9 +11,7 @@
 class Ball {
 private:
     float xStart, yStart;   /**Starting coords*/
-    float x, y; /**Current coords*/
-    float radius;   /**Size*/
-    sf::Color color;    /**Displayed color*/
+    sf::CircleShape *ball;
 
     float xSpeed, ySpeed;   /**Speed on both axises*/
     int xDirect, yDirect;   /**Direction either 1 or -1*/
@@ -28,7 +26,7 @@ public:
     Ball(float x, float y, float radius);   
     
     /**Default desctructor*/
-    ~Ball() {}
+    ~Ball();
     
     /**Draw ball in given window*/
     void Draw(std::shared_ptr <sf::RenderWindow> window); 

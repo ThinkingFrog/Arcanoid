@@ -2,66 +2,63 @@
 #include "Main.h"
 
 Bar::Bar(float x, float y, float width, float height) {
-    this->x = x;
-    this->y = y;
+    bar = new sf::RectangleShape({ width, height });
+    bar->setPosition(x, y);
+    bar->setFillColor(sf::Color::Blue);
     xStart = x;
     yStart = y;
-    this->width = width;
-    this->height = height;
-    color = sf::Color::Blue;
     xSpeed = BAR_X_SPEED;
     stick = false;
 }
 
-void Bar::Draw(std::shared_ptr <sf::RenderWindow> window) {
-    sf::RectangleShape shape(sf::Vector2f(width, height));
-    shape.setPosition(x, y);
-    shape.setFillColor(color);
+Bar::~Bar() {
+    delete bar;
+}
 
-    window->draw(shape);
+void Bar::Draw(std::shared_ptr <sf::RenderWindow> window) {
+    window->draw(*bar);
 }
 
 void Bar::Move() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        if (x >= 0)
-            x -= xSpeed;
+        if (bar->getPosition().x >= 0)
+            bar->move({ -xSpeed, 0 });
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        if (x + width <= defaultWindowWidth)
-            x += xSpeed;
+        if (bar->getPosition().x + bar->getSize().x <= defaultWindowWidth)
+            bar->move({ xSpeed, 0 });
     if (stick)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            color = sf::Color::Blue;
+            bar->setFillColor(sf::Color::Blue);
             stick = false;
         }
 }
 
 float Bar::GetXPos() {
-    return x;
+    return bar->getPosition().x;
 }
 
 float Bar::GetYPos() {
-    return y;
+    return bar->getPosition().y;
 }
 
 float Bar::GetWidth() {
-    return width;
+    return bar->getSize().x;
 }
 
 float Bar::GetHeight() {
-    return height;
+    return bar->getSize().y;
 }
 
 void Bar::SetWidth(float width) {
-    this->width = width;
+    bar->setSize({ width, bar->getSize().y});
 }
 
 void Bar::SetColor(sf::Color color) {
-    this->color = color;
+    bar->setFillColor(color);
 }
 
 void Bar::Reset() {
-    x = xStart;
-    y = yStart;
+    bar->setPosition(xStart, yStart);
 }
 
 void Bar::SetStick(bool stick) {
