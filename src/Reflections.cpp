@@ -1,4 +1,5 @@
 #include <vector>
+#include <cmath>
 #include "Ball.h"
 #include "Bar.h"
 #include "Field.h"
