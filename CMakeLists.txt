@@ -5,7 +5,7 @@ include_directories(include)
 file(GLOB SRC src/*.cpp)
 
 set(SFML_STATIC_LIBRARIES TRUE)
-set(SFML_DIR ../SFML-2.5.1/lib/cmake/SFML)
+set(SFML_DIR SFML/lib/cmake/SFML)
 
 find_package(SFML 2.5.1 COMPONENTS graphics REQUIRED)
 

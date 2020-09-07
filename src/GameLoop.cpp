@@ -14,7 +14,7 @@ GameLoop::GameLoop() {
     scoreWidth = windowWidth * (float)0.3;
     scoreHeight = windowHeight * (float)0.1;
     score = 0;
-    scoreFont.loadFromFile("../../Resources/score_font.ttf");
+    scoreFont.loadFromFile("Resources/score_font.ttf");
 
     bricksInRow = defaultBricksInRow;
     bricksInColumn = defaultBricksInColumn;
