@@ -4,8 +4,8 @@ extern int score;
 
 unsigned constexpr FRAME_RATE = 100;
 
-unsigned constexpr defaultWindowWidth = 1280;
-unsigned constexpr defaultWindowHeight = 720;
+unsigned constexpr defaultWindowWidth = 800;
+unsigned constexpr defaultWindowHeight = 600;
 unsigned constexpr defaultBricksInRow = 6;
 unsigned constexpr defaultBricksInColumn = 4;
 
